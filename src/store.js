@@ -5,6 +5,7 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.counter = Math.max(...initState.list.map(item => item.code), 0)// Счетчик созданных записей c началом отсчета от записи с максимальным id
   }
 
   /**
@@ -42,10 +43,12 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    this.counter++; // Увеличиваем счетчик для следующей записи
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      list: [...this.state.list, {code: this.counter, title: 'Новая запись'}]
     })
+
   };
 
   /**
@@ -69,7 +72,10 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
-        }
+          item.selections = (item.selections || 0) + (item.selected ? 1 : 0);
+        } else {
+        item.selected = false;
+      }
         return item;
       })
     })
