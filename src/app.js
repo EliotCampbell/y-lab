@@ -29,7 +29,10 @@ function App({store}) {
                     {item.selections > 0 ? item.title + ' | Выделяли ' + item.selections + ' раз': item.title}
                 </div>
                 <div className='Item-actions'>
-                  <button onClick={() => store.deleteItem(item.code)}>
+                  <button onClick={(e) => {
+                      e.stopPropagation()
+                      store.deleteItem(item.code)
+                  }}>
                     Удалить
                   </button>
                 </div>
