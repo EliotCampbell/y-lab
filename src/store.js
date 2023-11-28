@@ -1,3 +1,5 @@
+import {generateCode} from "./utils";
+
 /**
  * Хранилище состояния приложения
  */
@@ -5,7 +7,6 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
-    this.counter = Math.max(...initState.list.map(item => item.code), 0)// Счетчик созданных записей c началом отсчета от записи с максимальным id
   }
 
   /**
@@ -43,12 +44,10 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
-    this.counter++; // Увеличиваем счетчик для следующей записи
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.counter, title: 'Новая запись'}]
+      list: [...this.state.list, {code: generateCode(), title: 'Новая запись'}]
     })
-
   };
 
   /**
@@ -58,6 +57,7 @@ class Store {
   deleteItem(code) {
     this.setState({
       ...this.state,
+      // Новый список, в котором не будет удаляемой записи
       list: this.state.list.filter(item => item.code !== code)
     })
   };
@@ -71,12 +71,15 @@ class Store {
       ...this.state,
       list: this.state.list.map(item => {
         if (item.code === code) {
-          item.selected = !item.selected;
-          item.selections = (item.selections || 0) + (item.selected ? 1 : 0);
-        } else {
-        item.selected = false;
-      }
-        return item;
+          // Смена выделения и подсчёт
+          return {
+            ...item,
+            selected: !item.selected,
+            count: item.selected ? item.count : item.count + 1 || 1,
+          };
+        }
+        // Сброс выделения если выделена
+        return item.selected ? {...item, selected: false} : item;
       })
     })
   }
