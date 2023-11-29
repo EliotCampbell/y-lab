@@ -1,7 +1,8 @@
 import React from 'react';
 import './style.css'
+import PropTypes from "prop-types";
 
-const Index = ({title, ...props}) => {
+const Button = ({title, ...props}) => {
   return (
     <button {...props} className='Button'>
       {title}
@@ -9,4 +10,13 @@ const Index = ({title, ...props}) => {
   );
 };
 
-export default Index;
+Button.propTypes = {
+  title: PropTypes.string,
+  props: PropTypes.object
+};
+
+Button.defaultProps = {
+
+}
+
+export default Button;

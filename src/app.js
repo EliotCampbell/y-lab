@@ -27,9 +27,12 @@ function App({store}) {
   return (
     <PageLayout>
       <Head title='Магазин'/>
-      <Controls cart={cart} onDeleteCartItem={callbacks.onDeleteCartItem}/>
-      <List list={list}
-            onAddItemToCart={callbacks.onAddItemToCart}
+      <Controls
+        cart={cart}
+        onDeleteCartItem={callbacks.onDeleteCartItem}/>
+      <List
+        list={list}
+        onAddItemToCart={callbacks.onAddItemToCart}
       />
     </PageLayout>
   );

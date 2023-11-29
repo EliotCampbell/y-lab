@@ -38,6 +38,10 @@ class Store {
     for (const listener of this.listeners) listener();
   }
 
+  /**
+   * Установка состояния
+   * @param code {number}
+   */
   //Добавление товара в корзину по коду
   addItemToCart(code) {
     const item = this.state.list.find(el=> el.code === code)
@@ -54,17 +58,16 @@ class Store {
         cart: [...this.state.cart, {...item, count: 1}]
       })
     }
-    console.log(this.state.cart)
   };
 
   /**
    * Удаление из корины по коду
-   * @param code
+   * @param code {number}
    */
   deleteCartItem(code) {
     this.setState({
       ...this.state,
-      // Новый список, в котором не будет удаляемой записи
+      // Новый массив, в котором не будет удаляемого товара
       cart: this.state.cart.filter(item => item.code !== code)
     })
   };

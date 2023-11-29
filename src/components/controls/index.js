@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './style.css';
 import Modal from "../modal/modal";
 import Cart from "../cart";
-import {getCartSum} from "../../utils";
+import {getCartSum, plural} from "../../utils";
 import Button from "../button";
 
 function Controls({cart, onDeleteCartItem}) {
@@ -13,7 +13,11 @@ function Controls({cart, onDeleteCartItem}) {
     <div className='Controls'>
       <div className='Controls-info'>
         В корзине:
-        <b className='Controls-info_bold'>{`${cart.length} товара / ${getCartSum(cart)}`}</b>
+        <b className='Controls-info_bold'>{`${cart.length + ' ' + plural(cart.length, {
+          one: 'товар',
+          few: 'товара',
+          many: 'товаров'
+        })} / ${getCartSum(cart)}`}</b>
       </div>
       <div className='Controls-action'>
         <Button onClick={() => (setDisplayModal(true))} title={'Перейти'}/>
@@ -28,10 +32,12 @@ function Controls({cart, onDeleteCartItem}) {
 }
 
 Controls.propTypes = {
-  cart: PropTypes.array
+  cart: PropTypes.array,
+  onDeleteCartItem: PropTypes.func
 };
 
 Controls.defaultProps = {
+  onDeleteCartItem: ()=>{},
   cart: []
 }
 

@@ -1,4 +1,22 @@
 /**
+ * Плюрализация
+ * Возвращает вариант с учётом правил множественного числа под указанную локаль
+ * @param value {Number} Число, под которое выбирается вариант формы.
+ * @param variants {Object<String>} Варианты форм множественного числа.
+ * @example plural(5, {one: 'товар', few: 'товара', many: 'товаров'})
+ * @param [locale] {String} Локаль (код языка)
+ * @returns {*|string}
+ */
+export function plural(value, variants = {}, locale = 'ru-RU') {
+  // Получаем фурму кодовой строкой: 'zero', 'one', 'two', 'few', 'many', 'other'
+  // В русском языке 3 формы: 'one', 'few', 'many', и 'other' для дробных
+  // В английском 2 формы: 'one', 'other'
+  const key = new Intl.PluralRules(locale).select(value);
+  // Возвращаем вариант по ключу, если он есть
+  return variants[key] || '';
+}
+
+/**
  * Генератор чисел с шагом 1
  * Вариант с замыканием на начальное значение в самовызываемой функции.
  * @returns {Number}
@@ -9,8 +27,8 @@ export const generateCode = (function (start = 0) {
 
 /**
  * Форматтер цены
- * Вариант с замыканием на начальное значение в самовызываемой функции.
- * @returns {Number}
+ * @param price {Number} Цена товара.
+ * @returns {String}
  */
 export function formattedPrice(price) {
   let parts = price.toString().split(".");
@@ -18,8 +36,12 @@ export function formattedPrice(price) {
   return parts.join(".") + ' ₽';
 }
 
-//геттер итоговой суммы корзины
+/**
+ * Геттер итоговой суммы корзины
+ * @param cart {Array} Массив объектов - товаров (item).
+ * @returns {String}
+ */
 export function getCartSum(cart) {
-  const sum = cart.reduce((acc, el) => (el.price * el.count + acc),0)
+  const sum = cart.reduce((acc, item) => (item.price * item.count + acc),0)
   return formattedPrice(sum)
 }

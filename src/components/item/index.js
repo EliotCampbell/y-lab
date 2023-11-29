@@ -33,9 +33,9 @@ Item.propTypes = {
   item: PropTypes.shape({
     title: PropTypes.string,
     price: PropTypes.number,
-    code: PropTypes.number
+    code: PropTypes.number,
+    count: PropTypes.number
   }).isRequired,
-  type: PropTypes.string,
   buttonTitle: PropTypes.string,
   buttonAction: PropTypes.func,
 };
