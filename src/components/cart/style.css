@@ -2,7 +2,7 @@
   overflow: hidden;
   border-radius: 10px;
   background: #FFF;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.50);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.50);
   width: 960px;
   min-height: 407px;
   height: fit-content;
