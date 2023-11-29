@@ -1,0 +1,37 @@
+.Cart {
+  overflow: hidden;
+  border-radius: 10px;
+  background: #FFF;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.50);
+  width: 960px;
+  min-height: 407px;
+  height: fit-content;
+}
+
+.Cart-splitter {
+  height: 71px;
+  width: 100%;
+  border-bottom: 1px dashed #ccc;
+}
+
+.Cart-summary {
+  text-align: end;
+  min-height: 63px;
+  display: flex;
+  justify-content: end;
+  padding: 20px 10px;
+  font-size: 18px;
+  line-height: 21px;
+}
+
+.Cart-summaryTitle{
+
+}
+
+.Cart-summaryValue{
+  padding: 0 110px 0 10px;
+  width: 90px;
+  overflow: hidden;
+}
+
+
