@@ -3,8 +3,8 @@ import './style.css'
 import Item from "../item";
 import Head from "../head";
 import Button from "../button";
-import {getCartSum} from "../../utils";
 import PropTypes from "prop-types";
+import {formattedPrice} from "../../utils";
 
 const Cart = ({cart, onDeleteCartItem, setVisible}) => {
   return (
@@ -13,7 +13,7 @@ const Cart = ({cart, onDeleteCartItem, setVisible}) => {
         <Button title={'Закрыть'} onClick={()=>setVisible(false)}/>
       </Head>
       <div className={'Cart-splitter'}/>
-      {cart.map((item)=>(
+      {cart.items.map((item)=>(
         <div key={item.code} className='List-item'>
           <Item item={item}
                 buttonAction={onDeleteCartItem}
@@ -24,7 +24,7 @@ const Cart = ({cart, onDeleteCartItem, setVisible}) => {
       ))}
       <div className={'Cart-summary'}>
           <b className='Cart-summaryTitle'>Итого</b>
-          <b className='Cart-summaryValue'>{getCartSum(cart)}</b>
+          <b className='Cart-summaryValue'>{formattedPrice(cart.sum)}</b>
       </div>
     </div>
   );

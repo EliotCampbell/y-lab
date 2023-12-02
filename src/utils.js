@@ -36,12 +36,3 @@ export function formattedPrice(price) {
   return parts.join(".") + ' ₽';
 }
 
-/**
- * Геттер итоговой суммы корзины
- * @param cart {Array} Массив объектов - товаров (item).
- * @returns {String}
- */
-export function getCartSum(cart) {
-  const sum = cart.reduce((acc, item) => (item.price * item.count + acc),0)
-  return formattedPrice(sum)
-}
