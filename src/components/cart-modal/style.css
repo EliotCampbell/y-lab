@@ -1,4 +1,16 @@
-.Cart {
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.70);
+  display: flex;
+}
+
+.modal-content{
   overflow: hidden;
   border-radius: 10px;
   background: #FFF;
@@ -13,6 +25,7 @@
   width: 100%;
   border-bottom: 1px dashed #ccc;
 }
+
 
 .Cart-summary {
   text-align: end;
@@ -33,5 +46,4 @@
   width: 90px;
   overflow: hidden;
 }
-
 

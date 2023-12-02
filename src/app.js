@@ -1,8 +1,10 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import List from "./components/list";
 import Controls from "./components/controls";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
+import CartModal from "./components/cart-modal/index";
+
 
 /**
  * Приложение
@@ -11,7 +13,10 @@ import PageLayout from "./components/page-layout";
  */
 function App({store}) {
 
+  const [displayModal, setDisplayModal] = useState(false)
+
   const list = store.getState().list;
+
   const cart = store.getState().cart
 
   const callbacks = {
@@ -29,11 +34,20 @@ function App({store}) {
       <Head title='Магазин'/>
       <Controls
         cart={cart}
-        onDeleteCartItem={callbacks.onDeleteCartItem}/>
+        setDisplayModal={setDisplayModal}
+      />
       <List
         list={list}
-        onAddItemToCart={callbacks.onAddItemToCart}
+        itemAction={callbacks.onAddItemToCart}
+        itemButtonTitle={'Добавить'}
       />
+      {displayModal &&
+        <CartModal visible={displayModal}
+                   setVisible={setDisplayModal}
+                   cart={cart}
+                   onDeleteCartItem={callbacks.onDeleteCartItem}
+        />
+      }
     </PageLayout>
   );
 }
