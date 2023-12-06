@@ -11,9 +11,20 @@
   min-width: 20px;
   height: 16px;
   cursor: pointer;
+  &:hover {
+    background-color: #E1E1E1;;
+  }
+}
+
+.pagination-button_slitter {
+  text-align: center;
+  padding: 2px 0;
+  min-width: 20px;
+  height: 16px;
+  color: #CCCCCC;
 }
 
 .pagination-button.active {
-  background-color: #007bff;
+  background-color: #0087E9;
   color: #fff;
 }

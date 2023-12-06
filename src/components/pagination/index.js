@@ -30,7 +30,7 @@ function Pagination({ maxElements = 1, currentPage, onPageChange, limit = 10}) {
       }
       {currentPage > 3 &&
         <>
-          <div className={'pagination-button'}>{'...'}</div>
+          <div className={'pagination-button_slitter'}>{'...'}</div>
         </>
       }
 
@@ -42,7 +42,7 @@ function Pagination({ maxElements = 1, currentPage, onPageChange, limit = 10}) {
 
       {currentPage < (totalPages - 2) &&
         <>
-          <div className={'pagination-button'}>{'...'}</div>
+          <div className={'pagination-button_slitter'}>{'...'}</div>
         </>
       }
       {currentPage < (totalPages - 1) &&
