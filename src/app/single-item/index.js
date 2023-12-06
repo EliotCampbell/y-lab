@@ -12,11 +12,9 @@ function SingleItem() {
 
   const store = useStore();
 
-
-
   useEffect(() => {
     store.actions.itemDetails.loadItemById(params.id);
-  }, []);
+  }, [params]);
 
   const select = useSelector(state => ({
     amount: state.basket.amount,
