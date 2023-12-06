@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-function Pagination({ maxElements = 1, currentPage, onPageChange, limit }) {
+function Pagination({ maxElements = 1, currentPage, onPageChange, limit = 10}) {
   const totalPages = Math.ceil(maxElements / limit);
 
   const getPageNumbers = (currentPage, totalPages) => {

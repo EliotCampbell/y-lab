@@ -1,27 +1,9 @@
-import {memo, useCallback} from "react";
+import {memo} from "react";
 import PropTypes from 'prop-types';
 import './style.css';
 import Pagination from "../pagination";
-import useStore from "../../store/use-store";
-import useSelector from "../../store/use-selector";
 
-function List({list, renderItem}) {
-
-  const store = useStore();
-
-  const limit = 10
-
-  const select = useSelector(state => ({
-    count: state.catalog.count,
-    currentPage: state.catalog.currentPage
-  }));
-
-  const callbacks = {
-    updateList: useCallback((page, limit) => {
-      store.actions.catalog.load(page, limit)
-    }, [store]),
-    openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
-  }
+function List({list, renderItem, onPageChange, params}) {
 
   return (
     <div className='List'>{
@@ -30,7 +12,7 @@ function List({list, renderItem}) {
           {renderItem(item)}
         </div>
       )}
-      <Pagination maxElements={select.count} currentPage={select.currentPage} onPageChange={callbacks.updateList} limit={limit}/>
+      {onPageChange && <Pagination maxElements={params.count} currentPage={params.currentPage} onPageChange={onPageChange}/>}
     </div>
   )
 }

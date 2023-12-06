@@ -22,7 +22,7 @@ class Catalog extends StoreModule {
       list: json.result.items,
       count: json.result.count,
       currentPage: page
-    }, 'Загружены товары из АПИ c пагинацией');
+    }, 'Загружены товары из АПИ (c пагинацией)');
   }
 }
 
