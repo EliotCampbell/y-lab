@@ -33,7 +33,7 @@ class Basket extends StoreModule {
       // Поиск товара в каталоге, чтобы его добавить в корзину.
       // @todo В реальном приложении будет запрос к АПИ вместо поиска по состоянию.
 
-      const item = await fetch(`api/v1/articles/${_id}`).then(response => response.json()).then(data=> data.result);
+      const item = await fetch(`api/v1/articles/${_id}?fields=*,madeIn(title,code),category(title)`).then(response => response.json()).then(data=> data.result);
       list.push({...item, amount: 1}); // list уже новый, в него можно пушить.
       // Добавляем к сумме.
       sum += item.price;
