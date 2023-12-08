@@ -1,0 +1,11 @@
+/* Контрол с общими действиями */
+.Menu {
+  display: flex;
+  font-size: 18px;
+}
+
+.Menu-item {
+  color: #0087E9;
+  text-decoration-line: underline;
+  padding-right: 15px;
+}

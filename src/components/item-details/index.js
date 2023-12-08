@@ -24,10 +24,14 @@ function ItemDetails({item, itemAction}) {
 
 ItemDetails.propTypes = {
   item: PropTypes.shape({
-    _id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    _id: PropTypes.string,
     title: PropTypes.string,
     price: PropTypes.number,
-    amount: PropTypes.number
+    description: PropTypes.string,
+    madeIn: PropTypes.shape({
+      title: PropTypes.string,
+      code: PropTypes.string
+    })
   }).isRequired,
   onRemove: propTypes.func,
 }
