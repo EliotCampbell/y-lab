@@ -17,14 +17,6 @@ export function plural(value, variants = {}, locale = 'ru-RU') {
 }
 
 /**
- * Генератор чисел с шагом 1
- * @returns {Function}
- */
-export function codeGenerator(start = 0) {
-  return () => ++start;
-}
-
-/**
  * Форматирование разрядов числа
  * @param value {Number}
  * @param options {Object}
@@ -32,4 +24,26 @@ export function codeGenerator(start = 0) {
  */
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
+}
+
+export function buildCategoryTree(arr, parentId = null, level = 0) {
+  const result = [];
+  if (parentId === null && level === 0) {
+    result.push({  title: 'Все', value: '' });
+  }
+  for (const item of arr) {
+    if ((item.parent && item.parent._id === parentId) || (!item.parent && parentId === null)) {
+      const prefix = '-'.repeat(level);
+      const newItem = {
+        title: `${prefix} ${item.title}`,
+        value: item._id,
+      };
+
+      result.push(newItem);
+
+      const nestedItems = buildCategoryTree(arr, item._id, level + 1);
+      result.push(...nestedItems);
+    }
+  }
+  return result;
 }
