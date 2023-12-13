@@ -36,7 +36,7 @@ function CatalogList() {
         limit: select.limit,
         sort: select.sort,
         query: select.query,
-        category: select.category
+        ...(select.category && {category: select.category})
       })}`;
     }, [select.limit, select.sort, select.query])
   }

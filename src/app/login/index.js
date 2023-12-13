@@ -1,21 +1,23 @@
 import {memo, useCallback} from 'react';
 import useStore from "../../hooks/use-store";
+import useSelector from "../../hooks/use-selector";
 import useTranslate from "../../hooks/use-translate";
-import useInit from "../../hooks/use-init";
-import Navigation from "../../containers/navigation";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
-import CatalogFilter from "../../containers/catalog-filter";
-import CatalogList from "../../containers/catalog-list";
+import Navigation from "../../containers/navigation";
+import Spinner from "../../components/spinner";
 import LocaleSelect from "../../containers/locale-select";
-import useSelector from "../../hooks/use-selector";
+import LoginForm from "../../components/login-form";
+import useInit from "../../hooks/use-init";
 
 /**
- * Главная страница - первичная загрузка каталога
+ * Страница товара с первичной загрузкой товара по id из url адреса
  */
-function Main() {
+function Login() {
 
   const store = useStore();
+
+  useInit(() => {}, [], true);
 
   const select = useSelector(state => ({
     username: state.user.data.profile?.name,
@@ -23,29 +25,25 @@ function Main() {
     waiting: state.user.waiting,
   }));
 
-  useInit(() => {
-    store.actions.catalog.initParams();
-  }, [], true);
+  const {t} = useTranslate();
 
   const callbacks = {
     // Аутентификация
     auth: useCallback((login, password) => store.actions.user.auth(login, password), [store]),
-    // Сброс аутентификации
     logout: useCallback((token) => store.actions.user.logout(token), [store])
   }
 
-  const {t} = useTranslate();
-
   return (
     <PageLayout>
-      <Head title={t('title')} username={select.username} userLogoutAction={callbacks.logout} t={t}>
-        <LocaleSelect/>
-      </Head>
-      <Navigation/>
-      <CatalogFilter/>
-      <CatalogList/>
+      <Spinner active={select.waiting}>
+        <Head title={t('title')} username={select.username} userLogoutAction={callbacks.logout} t={t}>
+          <LocaleSelect/>
+        </Head>
+        <Navigation/>
+        <LoginForm auth={callbacks.auth} errorMessage={select.errorMessage} t={t}/>
+      </Spinner>
     </PageLayout>
   );
 }
 
-export default memo(Main);
+export default memo(Login);

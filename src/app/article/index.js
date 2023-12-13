@@ -1,4 +1,4 @@
-import {memo, useCallback, useMemo} from 'react';
+import {memo, useCallback} from 'react';
 import {useParams} from "react-router-dom";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
@@ -27,6 +27,7 @@ function Article() {
   const select = useSelector(state => ({
     article: state.article.data,
     waiting: state.article.waiting,
+    username: state.user.data.profile?.name,
   }));
 
   const {t} = useTranslate();
@@ -34,11 +35,13 @@ function Article() {
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
+    // Сброс аутентификации
+    logout: useCallback((token) => store.actions.user.logout(token), [store])
   }
 
   return (
     <PageLayout>
-      <Head title={select.article.title}>
+      <Head title={select.article.title} username={select.username} userLogoutAction={callbacks.logout} t={t}>
         <LocaleSelect/>
       </Head>
       <Navigation/>

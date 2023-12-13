@@ -1,0 +1,14 @@
+.UserInfo {
+  padding: 20px;
+}
+
+.UserInfo-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 30px 0;
+}
+
+.UserInfo-info {
+  font-size: 18px;
+  margin: 0 0 20px 0;
+}

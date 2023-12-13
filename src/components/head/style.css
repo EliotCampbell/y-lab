@@ -1,4 +1,27 @@
 .Head {
+}
+
+.Head-top {
+  height: 40px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+  border-bottom: 1px solid #DCDCDC;
+}
+
+.Head-topUsername {
+  color: #0087E9;
+  font-size: 13px;
+  text-decoration-line: underline;
+}
+
+.Head-topButton {
+  padding-left: 20px;
+}
+
+
+.Head-main {
   height: 80px;
   background: #f5f5f5;
   display: flex;
@@ -14,5 +37,4 @@
 
 .Head h1 {
   margin: 0;
-  padding: 20px 0 10px;
 }

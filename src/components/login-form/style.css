@@ -1,0 +1,35 @@
+.LoginForm {
+  padding: 14px 20px;
+}
+
+.LoginForm-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.LoginForm-area{
+  width: 203px;
+  display: flex;
+  flex-direction: column;
+}
+
+.LoginForm-input {
+  height: 20px;
+  margin-bottom: 20px;
+}
+
+.LoginForm-button {
+  width: 53px;
+}
+
+.LoginForm-errorText {
+  margin: 0 0 20px 0;
+  color: #F00;
+  height: 18px;
+  font-size: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
