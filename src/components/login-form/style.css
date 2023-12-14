@@ -20,7 +20,8 @@
 }
 
 .LoginForm-button {
-  width: 53px;
+  min-width: 53px;
+  max-width: fit-content;
 }
 
 .LoginForm-errorText {

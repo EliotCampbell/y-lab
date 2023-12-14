@@ -13,10 +13,10 @@ function Head({title, children, username, userLogoutAction, t}) {
           ?
           <>
             <Link to={'/profile'} className='Head-topUsername'>{username}</Link>
-            <div className='Head-topButton'><button onClick={() => userLogoutAction(getCookie('token'))}>{t('logout')}</button></div>
+            <div className='Head-topButton'><button onClick={() => userLogoutAction(getCookie('token'))}>{t('head.logout')}</button></div>
           </>
           :
-          <Link to={'/login'} className='Head-topButton'><button>{t('signIn')}</button></Link>
+          <Link to={'/login'} className='Head-topButton'><button>{t('head.signIn')}</button></Link>
         }
       </div>
       <div className='Head-main'>

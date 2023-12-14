@@ -14,14 +14,14 @@ const LoginForm = ({auth, errorMessage, t}) => {
 
   return (
     <div className='LoginForm'>
-      <p className='LoginForm-title'>{t('signIn')}</p>
+      <p className='LoginForm-title'>{t('loginForm.signIn')}</p>
       <form className='LoginForm-area' onSubmit={(event) => authHandler(event, login, password)}>
-        <label>{t('login')}</label>
+        <label>{t('loginForm.login')}</label>
         <input className='LoginForm-input' value={login} onChange={event => setLogin(event.target.value)}/>
-        <label>{t('password')}</label>
+        <label>{t('loginForm.password')}</label>
         <input className='LoginForm-input' type={'password'} value={password} onChange={(event) => setPassword(event.target.value) }/>
         {errorMessage && <p className='LoginForm-errorText' title={errorMessage}>{errorMessage}</p>}
-        <button className='LoginForm-button' type='submit'>{t('doSignIn')}</button>
+        <button className='LoginForm-button' type='submit'>{t('loginForm.doSignIn')}</button>
       </form>
     </div>
   );
