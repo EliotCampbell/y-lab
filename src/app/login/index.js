@@ -1,4 +1,4 @@
-import {memo, useCallback} from 'react';
+import {memo, useCallback, useEffect} from 'react';
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
 import useTranslate from "../../hooks/use-translate";
@@ -9,6 +9,7 @@ import Spinner from "../../components/spinner";
 import LocaleSelect from "../../containers/locale-select";
 import LoginForm from "../../components/login-form";
 import useInit from "../../hooks/use-init";
+import {useNavigate} from "react-router-dom";
 
 /**
  * Страница товара с первичной загрузкой товара по id из url адреса
@@ -19,18 +20,28 @@ function Login() {
 
   useInit(() => {}, [], true);
 
+  const navigate = useNavigate()
+
   const select = useSelector(state => ({
-    username: state.user.data.profile?.name,
-    errorMessage: state.user.errorMessage,
-    waiting: state.user.waiting,
+    username: state.userSession.data.profile?.name,
+    errorMessage: state.userSession.errorMessage,
+    waiting: state.userSession.waiting,
+    isAuth: state.userSession.isAuth
   }));
+
+  useEffect(() => {
+    if (select.isAuth) {
+      navigate(-1)
+    }
+  }, [navigate, select.isAuth]);
 
   const {t} = useTranslate();
 
   const callbacks = {
     // Аутентификация
-    auth: useCallback((login, password) => store.actions.user.auth(login, password), [store]),
-    logout: useCallback((token) => store.actions.user.logout(token), [store])
+    auth: useCallback((login, password) => store.actions.userSession.auth(login, password), [store]),
+    // Сброс аутентификации
+    logout: useCallback((token) => store.actions.userSession.logout(token), [store])
   }
 
   return (

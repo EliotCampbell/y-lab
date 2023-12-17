@@ -18,20 +18,19 @@ function Main() {
   const store = useStore();
 
   const select = useSelector(state => ({
-    username: state.user.data.profile?.name,
-    errorMessage: state.user.errorMessage,
-    waiting: state.user.waiting,
+    username: state.userSession.data.profile?.name,
   }));
 
   useInit(() => {
+    store.actions.categories.setCategories();
     store.actions.catalog.initParams();
   }, [], true);
 
   const callbacks = {
     // Аутентификация
-    auth: useCallback((login, password) => store.actions.user.auth(login, password), [store]),
+    auth: useCallback((login, password) => store.actions.userSession.auth(login, password), [store]),
     // Сброс аутентификации
-    logout: useCallback((token) => store.actions.user.logout(token), [store])
+    logout: useCallback((token) => store.actions.userSession.logout(token), [store])
   }
 
   const {t} = useTranslate();

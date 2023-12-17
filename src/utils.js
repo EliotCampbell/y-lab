@@ -33,7 +33,7 @@ export function buildCategoryTree(arr, parentId = null, level = 0) {
   }
   for (const item of arr) {
     if ((item.parent && item.parent._id === parentId) || (!item.parent && parentId === null)) {
-      const prefix = '-'.repeat(level);
+      const prefix = '- '.repeat(level);
       const newItem = {
         title: `${prefix} ${item.title}`,
         value: item._id,

@@ -27,7 +27,7 @@ function Article() {
   const select = useSelector(state => ({
     article: state.article.data,
     waiting: state.article.waiting,
-    username: state.user.data.profile?.name,
+    username: state.userSession.data.profile?.name,
   }));
 
   const {t} = useTranslate();
@@ -36,7 +36,7 @@ function Article() {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Сброс аутентификации
-    logout: useCallback((token) => store.actions.user.logout(token), [store])
+    logout: useCallback((token) => store.actions.userSession.logout(token), [store])
   }
 
   return (

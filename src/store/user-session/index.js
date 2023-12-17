@@ -3,13 +3,14 @@ import StoreModule from "../module";
 /**
  * Модуль состояния пользователя для управления данными и действиями, связанными с пользователем.
  */
-class UserState extends StoreModule {
+class UserSessionState extends StoreModule {
   /**
    * Инициализация состояния пользователя значениями по умолчанию.
    * @returns {Object} Объект начального состояния.
    */
   initState() {
     return {
+      isAuth: false,
       data: {},
       waiting: true, // Индикатор загрузки данных. True по умолчанию, так как в любом случае проверяем аутентификацию
       errorMessage: '',
@@ -41,7 +42,11 @@ class UserState extends StoreModule {
       }).then(response => response.json())
         .then(data => {
           if (data.result) {
-            this.setState({ ...this.initState(), data: data.result.user, waiting: false },
+            this.setState({
+                ...this.initState(),
+                data: data.result.user,
+                waiting: false,
+                isAuth: true },
               'Успешный вход, обновление состояния пользователя');
           } else if (data.error) {
             throw new Error(data.error.message);
@@ -82,6 +87,7 @@ class UserState extends StoreModule {
                 ...this.initState(),
                 waiting: false,
                 data: data.result,
+                isAuth: true
               },'Токен валиден, обновление данных пользователя');
             } else {
               throw new Error('Ошибка аутентификации');
@@ -127,4 +133,4 @@ class UserState extends StoreModule {
     }
   }
 
-  export default UserState;
+  export default UserSessionState;

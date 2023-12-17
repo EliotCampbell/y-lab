@@ -1,5 +1,4 @@
 import StoreModule from "../module";
-import {buildCategoryTree} from "../../utils";
 
 /**
  * Состояние каталога - параметры фильтра и список товара
@@ -13,7 +12,6 @@ class CatalogState extends StoreModule {
   initState() {
     return {
       list: [],
-      categories: [],
       params: {
         page: 1,
         limit: 10,
@@ -90,16 +88,12 @@ class CatalogState extends StoreModule {
     };
 
     //Фетч из апи
-    const categories = await fetch(`/api/v1/categories?fields=_id,title,parent(_id)&limit=*`)
-      .then(response => response.json())
-      .then((data) => data.result)
     const articles = await fetch(`/api/v1/articles?${new URLSearchParams(apiParams)}`)
       .then(response => response.json())
       .then((data) => data.result)
 
     this.setState({
       ...this.getState(),
-      categories: buildCategoryTree(categories.items),
       list: articles.items,
       count: articles.count,
       waiting: false
