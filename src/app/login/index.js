@@ -9,7 +9,7 @@ import Spinner from "../../components/spinner";
 import LocaleSelect from "../../containers/locale-select";
 import LoginForm from "../../components/login-form";
 import useInit from "../../hooks/use-init";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 /**
  * Страница товара с первичной загрузкой товара по id из url адреса
@@ -21,6 +21,7 @@ function Login() {
   useInit(() => {}, [], true);
 
   const navigate = useNavigate()
+  const location = useLocation();
 
   const select = useSelector(state => ({
     username: state.userSession.data.profile?.name,
@@ -30,8 +31,11 @@ function Login() {
   }));
 
   useEffect(() => {
-    if (select.isAuth) {
+    if (select.isAuth && location.key !== "default") {
       navigate(-1)
+    }
+    if (select.isAuth) {
+      navigate('/profile')
     }
   }, [navigate, select.isAuth]);
 
