@@ -89,7 +89,7 @@ const CommentsList = ({ _parent }) => {
               t={t}
             />
           ) : (
-            <ReplyFallback t={t} text={t('replyFallback.toComment')} resetEntityForComment={callbacks.resetEntityForComment} />
+            <ReplyFallback t={t} text={t('replyFallback.toComment')}/>
           )
         )}
       </Comments>

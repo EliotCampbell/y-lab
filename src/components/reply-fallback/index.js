@@ -15,12 +15,12 @@ const ReplyFallback = ({t, text, resetEntityForComment, redirectTo = '/login' })
           {t('replyFallback.logIn')}
         </Link>
          {text}
-          <p
+        {resetEntityForComment && <p
             className={cnCommentReply("authMessageLink")}
             onClick={() => resetEntityForComment()}
           >
             {t('replyFallback.cancel')}
-          </p>
+          </p>}
       </div>
     </div>
   );
@@ -35,7 +35,6 @@ ReplyFallback.propTypes = {
 
 ReplyFallback.defaultProps = {
   t: (text) => text,
-  resetEntityForComment: () => {},
 };
 
 export default memo(ReplyFallback);
