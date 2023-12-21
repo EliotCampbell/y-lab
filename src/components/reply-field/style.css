@@ -1,0 +1,30 @@
+.ReplyField {
+  padding: 15px 0 0;
+}
+
+.ReplyField-title {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.ReplyField-replyArea {
+  height: 76px;
+  width: 100%;
+  resize: none;
+  border: 1px solid #666;
+  background: #FFF;
+  box-shadow: 0 1px 4px 0 rgba(102, 102, 102, 0.10) inset;
+  margin: 0 0 10px 0;
+  outline: none;
+  color: #000;
+  font-family: Arial, serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  padding: 4px 5px;
+}
+
+.ReplyField-button {
+  margin-right: 10px;
+}

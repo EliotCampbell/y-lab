@@ -1,0 +1,53 @@
+.SingleComment {
+  margin: 0;
+  padding: 15px 0;
+  display: flex;
+  width: 100%;
+}
+
+.SingleComment-space {
+  width: 30px;
+}
+
+.SingleComment-body {
+  width: 100%;
+}
+
+.SingleComment-commentInfo {
+  display: flex;
+  padding-bottom: 10px;
+}
+
+.SingleComment-username {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.SingleComment-timeStamp {
+  color: #666;
+  font-size: 12px;
+  font-weight: 400;
+  padding-left:  10px;
+  margin: 0;
+}
+
+.SingleComment-content {
+  font-size: 14px;
+  margin: 0;
+}
+
+.SingleComment-reply {
+  width: fit-content;
+  margin: 0;
+  padding: 10px 0 0;
+  color: #0087E9;
+  font-size: 12px;
+  &:active {
+    color: #535353;
+  }
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}

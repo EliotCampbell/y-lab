@@ -1,0 +1,27 @@
+.ReplyFallback {
+  padding: 15px 0 0;
+}
+
+.ReplyFallback-authMessage {
+  font-size: 16px;
+  margin: 0;
+}
+
+.ReplyFallback-authMessageLink {
+  display: inline;
+  color: #0087E9;
+  font-size: 16px;
+  text-decoration-line: underline;
+  &:active {
+    color: #535353;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.ReplyFallback-title {
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}

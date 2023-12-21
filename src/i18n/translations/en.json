@@ -20,5 +20,20 @@
   "auth.password": "Password",
   "auth.signIn": "Sign in",
   "session.signIn": "Sign In",
-  "session.signOut": "Sign Out"
+  "session.signOut": "Sign Out",
+
+  "replyField.newComment": "New Comment",
+  "replyField.newReply": "New Reply",
+  "replyField.submit": "Submit",
+  "replyField.cancel": "Cancel",
+
+
+  "replyFallback.logIn": "Log In",
+  "replyFallback.toComment": ", to be able to comment. ",
+  "replyFallback.toReply": ", to be able to reply. ",
+  "replyFallback.cancel": "Cancel",
+
+  "comments.comments": "Comments ",
+
+  "singleComment.makeReply": "Reply"
 }

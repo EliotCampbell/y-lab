@@ -22,5 +22,19 @@
   "auth.password": "Пароль",
   "auth.signIn": "Войти",
   "session.signIn": "Вход",
-  "session.signOut": "Выход"
+  "session.signOut": "Выход",
+
+  "replyField.newComment": "Новый комментарий",
+  "replyField.newReply": "Новый ответ",
+  "replyField.submit": "Отправить",
+  "replyField.cancel": "Отмена",
+
+  "replyFallback.logIn": "Войдите",
+  "replyFallback.toComment": ", чтобы иметь возможность комментировать. ",
+  "replyFallback.toReply": ", чтобы иметь возможность ответить. ",
+  "replyFallback.cancel": "Отмена",
+
+  "comments.comments": "Комментарии ",
+
+  "singleComment.makeReply": "Ответить"
 }
