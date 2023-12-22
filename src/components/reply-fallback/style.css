@@ -1,5 +1,9 @@
 .ReplyFallback {
-  padding: 15px 0 0;
+  padding-top: 30px;
+}
+
+.ReplyFallback_space {
+  padding-left: 30px;
 }
 
 .ReplyFallback-authMessage {

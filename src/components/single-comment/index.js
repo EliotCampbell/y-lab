@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 const cnSingleComment = cn("SingleComment");
 
-const SingleComment = ({t, comment, children, selectEntityForComment }) => {
+const SingleComment = ({t, comment, children, selectEntityForComment, highlightUsername = false, addSpace}) => {
   const toLocaleOptions = {
     day: "numeric",
     month: "long",
@@ -14,15 +14,12 @@ const SingleComment = ({t, comment, children, selectEntityForComment }) => {
     minute: "numeric",
     hour12: false,
   };
-
   return (
     <div className={cnSingleComment()}>
-      {Array.from({ length: comment.level }, (_, index) => (
-        <div key={index} className={cnSingleComment("space")}></div>
-      ))}
+      {addSpace && <div className={cnSingleComment("space")}/>}
       <div className={cnSingleComment("body")}>
         <div className={cnSingleComment("commentInfo")}>
-          <p className={cnSingleComment("username")}>
+          <p className={cnSingleComment(highlightUsername ? "username_highlighted" : "username")}>
             {comment.author.profile.name}
           </p>
           <p className={cnSingleComment("timeStamp")}>
@@ -44,12 +41,12 @@ const SingleComment = ({t, comment, children, selectEntityForComment }) => {
 
 SingleComment.propTypes = {
   comment: PropTypes.shape({
-    level: PropTypes.number,
     author: PropTypes.shape({
       profile: PropTypes.shape({
         name: PropTypes.string,
       }),
     }),
+    level: PropTypes.number,
     dateCreate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
     text: PropTypes.string,
   }),

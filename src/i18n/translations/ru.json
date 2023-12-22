@@ -23,18 +23,20 @@
   "auth.signIn": "Войти",
   "session.signIn": "Вход",
   "session.signOut": "Выход",
-
   "replyField.newComment": "Новый комментарий",
   "replyField.newReply": "Новый ответ",
   "replyField.submit": "Отправить",
   "replyField.cancel": "Отмена",
-
   "replyFallback.logIn": "Войдите",
   "replyFallback.toComment": ", чтобы иметь возможность комментировать. ",
   "replyFallback.toReply": ", чтобы иметь возможность ответить. ",
   "replyFallback.cancel": "Отмена",
-
   "comments.comments": "Комментарии ",
-
-  "singleComment.makeReply": "Ответить"
+  "singleComment.makeReply": "Ответить",
+  "Input.search": "Поиск",
+  "CatalogFilter.ByOrder": "По порядку",
+  "CatalogFilter.ByName": "По именованию",
+  "CatalogFilter.PriceDescending": "Сначала дорогие",
+  "CatalogFilter.Ancients": "Древние",
+  "CatalogFilter.All": "Все"
 }

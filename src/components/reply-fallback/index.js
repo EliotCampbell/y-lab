@@ -1,22 +1,23 @@
 import React, {memo} from 'react';
-import { Link } from "react-router-dom";
 import { cn } from "@bem-react/classname";
 import './style.css';
 import PropTypes from "prop-types";
 
-const cnCommentReply = cn("ReplyFallback");
+const replyFallback = cn("ReplyFallback");
 
-const ReplyFallback = ({t, text, resetEntityForComment, redirectTo = '/login' }) => {
+const ReplyFallback = ({t, text, resetEntityForComment, onSignIn, addSpace = true}) => {
+
+  const blockWithSpace = replyFallback({ space: addSpace })
 
   return (
-    <div className={cnCommentReply()}>
-      <div className={cnCommentReply("authMessage")}>
-        <Link to={redirectTo} className={cnCommentReply("authMessageLink")}>
+    <div className={blockWithSpace}>
+      <div className={replyFallback("authMessage")}>
+        <p onClick={() => onSignIn()} className={replyFallback("authMessageLink")}>
           {t('replyFallback.logIn')}
-        </Link>
+        </p>
          {text}
         {resetEntityForComment && <p
-            className={cnCommentReply("authMessageLink")}
+            className={replyFallback("authMessageLink")}
             onClick={() => resetEntityForComment()}
           >
             {t('replyFallback.cancel')}
@@ -30,7 +31,8 @@ ReplyFallback.propTypes = {
   redirectTo: PropTypes.string,
   resetEntityForComment: PropTypes.func,
   text: PropTypes.string,
-  t: PropTypes.func
+  t: PropTypes.func,
+  space: PropTypes.bool
 };
 
 ReplyFallback.defaultProps = {

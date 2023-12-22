@@ -5,11 +5,13 @@ import PropTypes from "prop-types";
 
 const cnCommentReply = cn("ReplyField");
 
-const ReplyField = ({t, title, parent, submitComment, resetEntityForComment}) => {
+const ReplyField = ({t, title, parent, submitComment, resetEntityForComment, addSpace = true}) => {
   const [commentText, setCommentText] = useState('');
 
+  const blockWithSpace = cnCommentReply({ space: addSpace })
+
   return (
-    <form className={cnCommentReply()}>
+    <form className={blockWithSpace}>
       <p className={cnCommentReply("title")}>{title}</p>
       <textarea
         className={cnCommentReply("replyArea")}
@@ -18,7 +20,7 @@ const ReplyField = ({t, title, parent, submitComment, resetEntityForComment}) =>
       />
       <button
         className={cnCommentReply("button")}
-        onClick={() => submitComment(commentText, {
+        onClick={(event) => submitComment(event, commentText, {
           _id: parent._id,
           _type: parent._type
         })}
@@ -45,7 +47,8 @@ ReplyField.propTypes = {
   }),
   submitComment: PropTypes.func,
   resetEntityForComment: PropTypes.func,
-  t: PropTypes.func
+  t: PropTypes.func,
+  addSpace: PropTypes.bool
 };
 
 ReplyField.defaultProps = {

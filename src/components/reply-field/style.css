@@ -1,5 +1,9 @@
 .ReplyField {
-  padding: 15px 0 0;
+  padding-top: 30px;
+}
+
+.ReplyField_space {
+  padding-left: 30px;
 }
 
 .ReplyField-title {
@@ -23,6 +27,7 @@
   font-style: normal;
   font-weight: 400;
   padding: 4px 5px;
+  box-sizing: border-box;
 }
 
 .ReplyField-button {

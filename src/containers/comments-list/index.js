@@ -13,12 +13,14 @@ import useSelector from '../../hooks/use-selector';
 import shallowequal from 'shallowequal';
 import commentsActions from '../../store-redux/comments/actions';
 import listToTree from '../../utils/list-to-tree';
-import treeToList from '../../utils/tree-to-list';
+import {useNavigate} from "react-router-dom";
+import treeToComments from "../../utils/tree-to-comments";
 
 const CommentsList = ({ _parent }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const store = useStore();
-  const { t } = useTranslate();
+  const {t} = useTranslate();
 
   useInit(() => {
     _parent._id && dispatch(commentsActions.load(_parent._id));
@@ -26,6 +28,7 @@ const CommentsList = ({ _parent }) => {
 
   const select = useSelector((state) => ({
     exists: state.session.exists,
+    user: state.session.user
   }));
 
   const reduxSelect = useSelectorRedux((state) => ({
@@ -40,8 +43,9 @@ const CommentsList = ({ _parent }) => {
       dispatch(commentsActions.selectEntityForComment(id));
     }, [store]),
 
-    submitComment: useCallback((commentText, parentId) => {
-      if (commentText) {
+    submitComment: useCallback((event, commentText, parentId) => {
+      event.preventDefault()
+      if (commentText.trim()) {
         dispatch(commentsActions.submitComment(commentText, parentId));
       }
     }, [store]),
@@ -49,37 +53,53 @@ const CommentsList = ({ _parent }) => {
     resetEntityForComment: useCallback(() => {
       dispatch(commentsActions.resetEntityForComment());
     }, [store]),
+
+    onSignIn: useCallback(() => {
+      navigate('/login', {state: {back: location.pathname}});
+    }, [location.pathname]),
   };
 
-  const createCommentsHierarchy = (comments) => {
-    return treeToList(listToTree(comments), (item, level) => ({
-      ...item,
-      level: level - 1,
-    })).slice(1);
-  };
+  const transformComments = (comments = []) => {
+    const tree = listToTree(comments)[0]?.children
+    return treeToComments(tree, (item, level) => (
+      {...item, addSpace: level >= 1 && level <= 15,}
+    ))
+  }
 
-  const sortedComments = createCommentsHierarchy(reduxSelect.comments);
+  const comments = transformComments(reduxSelect.comments)
+
+  const renderComments = (commentsArray) => (
+    commentsArray.map(comment => {
+      const highlightUsername = comment.author._id === select.user._id
+      return (
+        <SingleComment key={comment._id} comment={comment} selectEntityForComment={callbacks.selectEntityForComment} t={t} highlightUsername={highlightUsername} addSpace={comment.addSpace}>
+          <>
+            {comment.children.length > 0 && renderComments(comment.children)}
+            {reduxSelect.entityForComment === comment._id && renderReply(comment)}
+          </>
+        </SingleComment>
+      )
+    })
+  )
+
+  const renderReply = (comment) => (
+      select.exists ? (
+        <ReplyField
+          parent={comment}
+          submitComment={callbacks.submitComment}
+          resetEntityForComment={callbacks.resetEntityForComment}
+          title={t('replyField.newReply')}
+          t={t}
+        />
+      ) : (
+        <ReplyFallback t={t} text={t('replyFallback.toReply')} resetEntityForComment={callbacks.resetEntityForComment} onSignIn={callbacks.onSignIn}/>
+      )
+  )
 
   return (
     <Spinner active={reduxSelect.waiting}>
       <Comments commentsCount={reduxSelect.commentsCount} t={t}>
-        {sortedComments.map((comment) => (
-          <SingleComment key={comment._id} comment={comment} selectEntityForComment={callbacks.selectEntityForComment} t={t}>
-            {reduxSelect.entityForComment === comment._id && (
-              select.exists ? (
-                <ReplyField
-                  parent={comment}
-                  submitComment={callbacks.submitComment}
-                  resetEntityForComment={callbacks.resetEntityForComment}
-                  title={t('replyField.newReply')}
-                  t={t}
-                />
-              ) : (
-                <ReplyFallback t={t} text={t('replyFallback.toReply')} resetEntityForComment={callbacks.resetEntityForComment}/>
-              )
-            )}
-          </SingleComment>
-        ))}
+        {renderComments(comments)}
         {reduxSelect.entityForComment === _parent._id && (
           select.exists ? (
             <ReplyField
@@ -87,14 +107,14 @@ const CommentsList = ({ _parent }) => {
               submitComment={callbacks.submitComment}
               title={t('replyField.newComment')}
               t={t}
+              addSpace={false}
             />
           ) : (
-            <ReplyFallback t={t} text={t('replyFallback.toComment')}/>
+            <ReplyFallback t={t} text={t('replyFallback.toComment')} onSignIn={callbacks.onSignIn} addSpace={false}/>
           )
         )}
       </Comments>
-    </Spinner>
-  );
+    </Spinner>)
 };
 
 CommentsList.propTypes = {
