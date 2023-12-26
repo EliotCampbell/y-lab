@@ -5,6 +5,7 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.counter = Math.max(...initState.list.map(item => item.code), 0)// Счетчик созданных записей c началом отсчета от записи с максимальным id
   }
 
   /**

@@ -4,7 +4,8 @@ import Controls from "./components/controls";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
 import CartModal from "./components/cart-modal/index";
-
+import React from 'react';
+import './styles.css';
 
 /**
  * Приложение
